@@ -1,0 +1,331 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> line
+Rule 1     line -> instruction
+Rule 2     instruction -> COMMAND REGISTER , REGISTER , REGISTER
+Rule 3     line -> COMMAND COMMAND
+Rule 4     instruction -> COMMAND REGISTER , REGISTER
+Rule 5     instruction -> COMMAND REGISTER , REGISTER , INTEGER
+Rule 6     instruction -> COMMAND REGISTER , INTEGER
+Rule 7     instruction -> COMMAND REGISTER , [ STACKPOINTER , INTEGER ]
+Rule 8     instruction -> COMMAND REGISTER , [ STACKPOINTER ]
+Rule 9     instruction -> COMMAND [ STACKPOINTER , ] STACKPOINTER , INTEGER
+Rule 10    instruction -> COMMAND STACKPOINTER , STACKPOINTER , INTEGER
+Rule 11    instruction -> COMMAND STACKPOINTER , INTEGER
+Rule 12    instruction -> COMMAND LABEL
+Rule 13    line -> MAIN
+Rule 14    line -> LABEL
+
+Terminals, with rules where they appear
+
+,                    : 2 2 4 5 5 6 7 7 8 9 9 10 10 11
+COMMAND              : 2 3 3 4 5 6 7 8 9 10 11 12
+INTEGER              : 5 6 7 9 10 11
+LABEL                : 12 14
+MAIN                 : 13
+REGISTER             : 2 2 2 4 4 5 5 6 7 8
+STACKPOINTER         : 7 8 9 9 10 10 11
+[                    : 7 8 9
+]                    : 7 8 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+instruction          : 1
+line                 : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . line
+    (1) line -> . instruction
+    (3) line -> . COMMAND COMMAND
+    (13) line -> . MAIN
+    (14) line -> . LABEL
+    (2) instruction -> . COMMAND REGISTER , REGISTER , REGISTER
+    (4) instruction -> . COMMAND REGISTER , REGISTER
+    (5) instruction -> . COMMAND REGISTER , REGISTER , INTEGER
+    (6) instruction -> . COMMAND REGISTER , INTEGER
+    (7) instruction -> . COMMAND REGISTER , [ STACKPOINTER , INTEGER ]
+    (8) instruction -> . COMMAND REGISTER , [ STACKPOINTER ]
+    (9) instruction -> . COMMAND [ STACKPOINTER , ] STACKPOINTER , INTEGER
+    (10) instruction -> . COMMAND STACKPOINTER , STACKPOINTER , INTEGER
+    (11) instruction -> . COMMAND STACKPOINTER , INTEGER
+    (12) instruction -> . COMMAND LABEL
+
+    COMMAND         shift and go to state 3
+    MAIN            shift and go to state 4
+    LABEL           shift and go to state 5
+
+    line                           shift and go to state 1
+    instruction                    shift and go to state 2
+
+state 1
+
+    (0) S' -> line .
+
+
+
+state 2
+
+    (1) line -> instruction .
+
+    $end            reduce using rule 1 (line -> instruction .)
+
+
+state 3
+
+    (3) line -> COMMAND . COMMAND
+    (2) instruction -> COMMAND . REGISTER , REGISTER , REGISTER
+    (4) instruction -> COMMAND . REGISTER , REGISTER
+    (5) instruction -> COMMAND . REGISTER , REGISTER , INTEGER
+    (6) instruction -> COMMAND . REGISTER , INTEGER
+    (7) instruction -> COMMAND . REGISTER , [ STACKPOINTER , INTEGER ]
+    (8) instruction -> COMMAND . REGISTER , [ STACKPOINTER ]
+    (9) instruction -> COMMAND . [ STACKPOINTER , ] STACKPOINTER , INTEGER
+    (10) instruction -> COMMAND . STACKPOINTER , STACKPOINTER , INTEGER
+    (11) instruction -> COMMAND . STACKPOINTER , INTEGER
+    (12) instruction -> COMMAND . LABEL
+
+    COMMAND         shift and go to state 6
+    REGISTER        shift and go to state 7
+    [               shift and go to state 8
+    STACKPOINTER    shift and go to state 9
+    LABEL           shift and go to state 10
+
+
+state 4
+
+    (13) line -> MAIN .
+
+    $end            reduce using rule 13 (line -> MAIN .)
+
+
+state 5
+
+    (14) line -> LABEL .
+
+    $end            reduce using rule 14 (line -> LABEL .)
+
+
+state 6
+
+    (3) line -> COMMAND COMMAND .
+
+    $end            reduce using rule 3 (line -> COMMAND COMMAND .)
+
+
+state 7
+
+    (2) instruction -> COMMAND REGISTER . , REGISTER , REGISTER
+    (4) instruction -> COMMAND REGISTER . , REGISTER
+    (5) instruction -> COMMAND REGISTER . , REGISTER , INTEGER
+    (6) instruction -> COMMAND REGISTER . , INTEGER
+    (7) instruction -> COMMAND REGISTER . , [ STACKPOINTER , INTEGER ]
+    (8) instruction -> COMMAND REGISTER . , [ STACKPOINTER ]
+
+    ,               shift and go to state 11
+
+
+state 8
+
+    (9) instruction -> COMMAND [ . STACKPOINTER , ] STACKPOINTER , INTEGER
+
+    STACKPOINTER    shift and go to state 12
+
+
+state 9
+
+    (10) instruction -> COMMAND STACKPOINTER . , STACKPOINTER , INTEGER
+    (11) instruction -> COMMAND STACKPOINTER . , INTEGER
+
+    ,               shift and go to state 13
+
+
+state 10
+
+    (12) instruction -> COMMAND LABEL .
+
+    $end            reduce using rule 12 (instruction -> COMMAND LABEL .)
+
+
+state 11
+
+    (2) instruction -> COMMAND REGISTER , . REGISTER , REGISTER
+    (4) instruction -> COMMAND REGISTER , . REGISTER
+    (5) instruction -> COMMAND REGISTER , . REGISTER , INTEGER
+    (6) instruction -> COMMAND REGISTER , . INTEGER
+    (7) instruction -> COMMAND REGISTER , . [ STACKPOINTER , INTEGER ]
+    (8) instruction -> COMMAND REGISTER , . [ STACKPOINTER ]
+
+    REGISTER        shift and go to state 14
+    INTEGER         shift and go to state 15
+    [               shift and go to state 16
+
+
+state 12
+
+    (9) instruction -> COMMAND [ STACKPOINTER . , ] STACKPOINTER , INTEGER
+
+    ,               shift and go to state 17
+
+
+state 13
+
+    (10) instruction -> COMMAND STACKPOINTER , . STACKPOINTER , INTEGER
+    (11) instruction -> COMMAND STACKPOINTER , . INTEGER
+
+    STACKPOINTER    shift and go to state 18
+    INTEGER         shift and go to state 19
+
+
+state 14
+
+    (2) instruction -> COMMAND REGISTER , REGISTER . , REGISTER
+    (4) instruction -> COMMAND REGISTER , REGISTER .
+    (5) instruction -> COMMAND REGISTER , REGISTER . , INTEGER
+
+    ,               shift and go to state 20
+    $end            reduce using rule 4 (instruction -> COMMAND REGISTER , REGISTER .)
+
+
+state 15
+
+    (6) instruction -> COMMAND REGISTER , INTEGER .
+
+    $end            reduce using rule 6 (instruction -> COMMAND REGISTER , INTEGER .)
+
+
+state 16
+
+    (7) instruction -> COMMAND REGISTER , [ . STACKPOINTER , INTEGER ]
+    (8) instruction -> COMMAND REGISTER , [ . STACKPOINTER ]
+
+    STACKPOINTER    shift and go to state 21
+
+
+state 17
+
+    (9) instruction -> COMMAND [ STACKPOINTER , . ] STACKPOINTER , INTEGER
+
+    ]               shift and go to state 22
+
+
+state 18
+
+    (10) instruction -> COMMAND STACKPOINTER , STACKPOINTER . , INTEGER
+
+    ,               shift and go to state 23
+
+
+state 19
+
+    (11) instruction -> COMMAND STACKPOINTER , INTEGER .
+
+    $end            reduce using rule 11 (instruction -> COMMAND STACKPOINTER , INTEGER .)
+
+
+state 20
+
+    (2) instruction -> COMMAND REGISTER , REGISTER , . REGISTER
+    (5) instruction -> COMMAND REGISTER , REGISTER , . INTEGER
+
+    REGISTER        shift and go to state 24
+    INTEGER         shift and go to state 25
+
+
+state 21
+
+    (7) instruction -> COMMAND REGISTER , [ STACKPOINTER . , INTEGER ]
+    (8) instruction -> COMMAND REGISTER , [ STACKPOINTER . ]
+
+    ,               shift and go to state 26
+    ]               shift and go to state 27
+
+
+state 22
+
+    (9) instruction -> COMMAND [ STACKPOINTER , ] . STACKPOINTER , INTEGER
+
+    STACKPOINTER    shift and go to state 28
+
+
+state 23
+
+    (10) instruction -> COMMAND STACKPOINTER , STACKPOINTER , . INTEGER
+
+    INTEGER         shift and go to state 29
+
+
+state 24
+
+    (2) instruction -> COMMAND REGISTER , REGISTER , REGISTER .
+
+    $end            reduce using rule 2 (instruction -> COMMAND REGISTER , REGISTER , REGISTER .)
+
+
+state 25
+
+    (5) instruction -> COMMAND REGISTER , REGISTER , INTEGER .
+
+    $end            reduce using rule 5 (instruction -> COMMAND REGISTER , REGISTER , INTEGER .)
+
+
+state 26
+
+    (7) instruction -> COMMAND REGISTER , [ STACKPOINTER , . INTEGER ]
+
+    INTEGER         shift and go to state 30
+
+
+state 27
+
+    (8) instruction -> COMMAND REGISTER , [ STACKPOINTER ] .
+
+    $end            reduce using rule 8 (instruction -> COMMAND REGISTER , [ STACKPOINTER ] .)
+
+
+state 28
+
+    (9) instruction -> COMMAND [ STACKPOINTER , ] STACKPOINTER . , INTEGER
+
+    ,               shift and go to state 31
+
+
+state 29
+
+    (10) instruction -> COMMAND STACKPOINTER , STACKPOINTER , INTEGER .
+
+    $end            reduce using rule 10 (instruction -> COMMAND STACKPOINTER , STACKPOINTER , INTEGER .)
+
+
+state 30
+
+    (7) instruction -> COMMAND REGISTER , [ STACKPOINTER , INTEGER . ]
+
+    ]               shift and go to state 32
+
+
+state 31
+
+    (9) instruction -> COMMAND [ STACKPOINTER , ] STACKPOINTER , . INTEGER
+
+    INTEGER         shift and go to state 33
+
+
+state 32
+
+    (7) instruction -> COMMAND REGISTER , [ STACKPOINTER , INTEGER ] .
+
+    $end            reduce using rule 7 (instruction -> COMMAND REGISTER , [ STACKPOINTER , INTEGER ] .)
+
+
+state 33
+
+    (9) instruction -> COMMAND [ STACKPOINTER , ] STACKPOINTER , INTEGER .
+
+    $end            reduce using rule 9 (instruction -> COMMAND [ STACKPOINTER , ] STACKPOINTER , INTEGER .)
+
